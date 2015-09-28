@@ -32,7 +32,7 @@ class MavCompatibility(IPlugin):
 
         #This looks at the list of machines, selects the machines that have a "mac_firewall_status" fact 
         #then it checks for the ones that have "disabled in the contents and counts them
-
+        firewall_status_off = machines.filter(fact__fact_name='mac_firewall_status', fact__fact_data__contains='disabled').count()
 
         #This is the data sent from this code to be displayed on the page. 
         #title = the title of the plugin
@@ -42,7 +42,7 @@ class MavCompatibility(IPlugin):
         c = Context({
             'title': 'Firewall Status',
             'firewallstatus_on': firewall_status_on,
-            'firewallstatus_off': '50',
+            'firewallstatus_off': firewall_status_off,
             'page': page,
             'theid': theid
         })
@@ -53,6 +53,9 @@ class MavCompatibility(IPlugin):
         if data == 'firewallstatus_on':
             machines = machines.filter(fact__fact_name='mac_firewall_status', fact__fact_data__contains='Firewall is enabled.')
             title = 'Macs with enabled Firewalls'
+        elif data == 'firewallstatus_off':
+            machines = machines.filter(fact__fact_name='mac_firewall_status', fact__fact_data__contains='disabled')
+            title = 'Macs with disabled Firewalls'
         else:
             machines = None
             titles = None
