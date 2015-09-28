@@ -1,0 +1,9 @@
+[Core]
+Name = FireWallStatus
+Module = firewallstatus
+
+[Documentation]
+Author = Alan Roberts
+Version = 0.1
+Website = xperteks.com
+Description = Displays macs that have their firewall enabled

@@ -1,0 +1,14 @@
+<div class="col-md-4">
+    <div class="panel panel-default panel-traffic-light">
+        <div class="panel-heading">
+            {{ title }}
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+          <a href="{% url 'machine_list_front' 'FireWallStatus' 'firewallstatus' %}" class="btn btn-success">
+			<span class="bigger"> {{ firewallstatus }} </span><br />
+			Enabled
+          </a>
+        </div>
+      </div>
+</div>
