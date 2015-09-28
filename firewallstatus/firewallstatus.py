@@ -28,16 +28,21 @@ class MavCompatibility(IPlugin):
         #facter fact "mac_firewall_status
         #then checks for the ones in that list that have the contents "Firewall is enabled." and counts them
         #then it assigns that count to the "firewall_status" variable
-        firewall_status = machines.filter(fact__fact_name='mac_firewall_status', fact__fact_data__contains='Firewall is enabled.').count()
+        firewall_status_on = machines.filter(fact__fact_name='mac_firewall_status', fact__fact_data__contains='Firewall is enabled.').count()
+
+        #This looks at the list of machines, selects the machines that have a "mac_firewall_status" fact 
+        #then it checks for the ones that have "disabled in the contents and counts them
 
 
         #This is the data sent from this code to be displayed on the page. 
         #title = the title of the plugin
-        #firewallstatus = the number displayed in the button in the plugin
+        #firewallstatus_on = the number displayed in the "Enabled" button
+        #firewallstatus_off = the number displayed in the "Disabled" button
         #page and theid are used the same as was passed to this plugin from SAL, so it knows where to display the plugin
         c = Context({
             'title': 'Firewall Status',
-            'firewallstatus': firewall_status,
+            'firewallstatus_on': firewall_status_on,
+            'firewallstatus_off': '50',
             'page': page,
             'theid': theid
         })
@@ -45,7 +50,7 @@ class MavCompatibility(IPlugin):
 
     #This next part will allow SAL to build a new page and display the list of the machines that match our criteria
     def filter_machines(self, machines, data):
-        if data == 'firewallstatus':
+        if data == 'firewallstatus_on':
             machines = machines.filter(fact__fact_name='mac_firewall_status', fact__fact_data__contains='Firewall is enabled.')
             title = 'Macs with enabled Firewalls'
         else:
@@ -53,6 +58,3 @@ class MavCompatibility(IPlugin):
             titles = None
  
         return machines, title
-
-
-

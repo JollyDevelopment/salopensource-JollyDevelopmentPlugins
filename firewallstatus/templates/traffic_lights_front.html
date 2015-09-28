@@ -5,9 +5,14 @@
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-          <a href="{% url 'machine_list_front' 'FireWallStatus' 'firewallstatus' %}" class="btn btn-success">
-			<span class="bigger"> {{ firewallstatus }} </span><br />
+          <a href="{% url 'machine_list_front' 'FireWallStatus' 'firewallstatus_on' %}" class="btn btn-success">
+			<span class="bigger"> {{ firewallstatus_on }} </span><br />
 			Enabled
+          </a>
+
+          <a href="#" class="btn btn-danger">
+                        <span class="bigger"> {{ firewallstatus_off }} </span><br />
+                        Disabled
           </a>
         </div>
       </div>
