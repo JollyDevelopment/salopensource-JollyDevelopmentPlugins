@@ -6,6 +6,8 @@ This plugin polls for the current status of a MAC OSX firewall. It requires the 
 
 This is based on an install of SAL on an Ubuntu 14.04 system. Instructions found here: https://github.com/salopensource/sal/blob/master/docs/Installation_on_Ubuntu_14.md
 
+Note: The templates are expecting the folder path to be <sal_plugins_folder>/jollydevelopment/<file_name>.html. If you are having "Page not found" type errors, check the templates and make sure the path they expect matches your environment.
+
 Copy (or clone) the following files to your SAL plugins folder:
 * firewallstatus/
 * firewallstatus/firewallstatus.py
