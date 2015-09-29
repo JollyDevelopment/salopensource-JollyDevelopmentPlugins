@@ -16,13 +16,13 @@ class MavCompatibility(IPlugin):
     def show_widget(self, page, machines=None, theid=None):
 
         if page == 'front':
-            t = loader.get_template('xperteks/firewallstatus/templates/traffic_lights_front.html')
+            t = loader.get_template('jollydevelopment/firewallstatus/templates/traffic_lights_front.html')
         
         if page == 'bu_dashboard':
-            t = loader.get_template('xperteks/firewallstatus/templates/traffic_lights_id.html')
+            t = loader.get_template('jollydevelopment/firewallstatus/templates/traffic_lights_id.html')
         
         if page == 'group_dashboard':
-            t = loader.get_template('xperteks/firewallstatus/templates/traffic_lights_id.html')
+            t = loader.get_template('jollydevelopment/firewallstatus/templates/traffic_lights_id.html')
             
         #this looks at the list of machines, sellects the machines that have a "mac_firewall_status" fact (from the custom 
         #facter fact "mac_firewall_status
