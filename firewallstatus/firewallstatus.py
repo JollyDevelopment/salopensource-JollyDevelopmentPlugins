@@ -24,15 +24,26 @@ class MavCompatibility(IPlugin):
         if page == 'group_dashboard':
             t = loader.get_template('jollydevelopment/firewallstatus/templates/traffic_lights_id.html')
             
-        #this looks at the list of machines, sellects the machines that have a "mac_firewall_status" fact (from the custom 
-        #facter fact "mac_firewall_status
+        #This checks to see if the machines list is populated, then
+        #this looks at the list of machines, selects the machines that have a "mac_firewall_status" fact, from the custom 
+        #facter fact "mac_firewall_status"
         #then checks for the ones in that list that have the contents "Firewall is enabled." and counts them
         #then it assigns that count to the "firewall_status" variable
-        firewall_status_on = machines.filter(fact__fact_name='mac_firewall_status', fact__fact_data__contains='Firewall is enabled.').count()
+        #if there are no machines it sets the variable to 0
+        if machines:
+		firewall_status_on = machines.filter(fact__fact_name='mac_firewall_status', fact__fact_data__contains='Firewall is enabled.').count()
+	else:
+		firewall_status_on = 0
 
+	#This checks to see if the list of machines is populated, then
         #This looks at the list of machines, selects the machines that have a "mac_firewall_status" fact 
         #then it checks for the ones that have "disabled in the contents and counts them
-        firewall_status_off = machines.filter(fact__fact_name='mac_firewall_status', fact__fact_data__contains='disabled').count()
+	#then it assigns that count to the "firewall_Status_off" variable
+	#if there are no machines it sets the variable to 0
+	if machines:
+		firewall_status_off = machines.filter(fact__fact_name='mac_firewall_status', fact__fact_data__contains='disabled').count()
+	else:
+		firewall_status_off = 0
 
         #This is the data sent from this code to be displayed on the page. 
         #title = the title of the plugin
